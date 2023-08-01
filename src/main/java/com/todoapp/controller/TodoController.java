@@ -19,6 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/")
 @Validated
+@CrossOrigin
 public class TodoController {
     private TodoMapper mapper;
     private TodoService todoService;
