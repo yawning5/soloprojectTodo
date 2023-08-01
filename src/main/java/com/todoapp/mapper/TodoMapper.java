@@ -9,6 +9,6 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface TodoMapper {
     Todo todoPostDtoToTodo(TodoPostDto todoPostDto);
-    Todo todoToTodoPatchDto(TodoPatchDto todoPatchDto);
+    Todo todoPatchDtoToTodo(TodoPatchDto todoPatchDto);
     TodoResponseDto todoToTodoResponseDto(Todo todo);
 }
