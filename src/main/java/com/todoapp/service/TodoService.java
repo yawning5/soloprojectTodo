@@ -40,12 +40,12 @@ public class TodoService {
         return todoRepository.save(realTodo);
     }
 
-    public void deleteTodo(long Id) {
-
+    public void deleteTodo(long id) {
+        todoRepository.deleteById(id);
     }
 
     public void deleteTodos() {
-
+        todoRepository.deleteAll();
     }
 
 }
