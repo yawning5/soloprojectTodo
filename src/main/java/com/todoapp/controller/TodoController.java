@@ -1,31 +1,37 @@
 package com.todoapp.controller;
 
+import com.todoapp.dto.TodoPostDto;
 import com.todoapp.entity.Todo;
+import com.todoapp.mapper.TodoMapper;
 import com.todoapp.repository.TodoRepository;
+import com.todoapp.service.TodoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 
 @RestController
 @RequestMapping("/")
+@Validated
 public class TodoController {
-    private TodoRepository todoRepository;
+    private TodoMapper mapper;
+    private TodoService todoService;
 
-    public TodoController(TodoRepository todoRepository) {
-        this.todoRepository = todoRepository;
+    public TodoController(TodoMapper mapper, TodoService todoService) {
+        this.mapper = mapper;
+        this.todoService = todoService;
     }
 
     @PostMapping
-    public ResponseEntity postTodo() {
-        Todo todo = new Todo();
-        todo.setTodoOrder(1);
-        todo.setTitle("테스트");
-        todoRepository.save(todo);
+    public ResponseEntity postTodo(@RequestBody TodoPostDto todoPostDto) {
+        Todo todo = todoService.creatTodo(mapper.todoPostDtoToTodo(todoPostDto));
+
         return new ResponseEntity(todo, HttpStatus.OK);
     }
-
+//
 //    @GetMapping
 //    public ResponseEntity getTodos() {
 //
